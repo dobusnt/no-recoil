@@ -14,10 +14,7 @@ A versatile no-recoil assistant that works with all mice brands. This applicatio
 - **Adjustable Settings**: Sensitivity, recoil strength, and movement methods
 - **Hotkey Support**: Customizable toggle keys
 
-## Screenshots
-
-![Console Interface](https://imgur.com/I49BEMw)
-(Replace with actual screenshot when available)
+https://imgur.com/I49BEMw
 
 ## Installation
 
