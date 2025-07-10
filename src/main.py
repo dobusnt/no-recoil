@@ -24,7 +24,6 @@ class NoRecoilApp:
         self.load_profiles()
         
     def show_banner(self):
-        """Display a fancy banner for the application"""
         banner = f"""
 {Fore.RED}     ▄▄▄██▀▀▀██╗   ██╗██╗ ██████╗███████╗██████╗  █████╗ ███╗   ██╗████████╗
 {Fore.RED}       ▒██  ██║   ██║██║██╔════╝██╔════╝██╔══██╗██╔══██╗████╗  ██║╚══██╔══╝
@@ -35,7 +34,7 @@ class NoRecoilApp:
 {Fore.YELLOW}╔═════════════════════════════════════════════════════════════════════════╗
 {Fore.YELLOW}║{Fore.RED} ☠️  CROSS-COMPATIBLE MOUSE MOVEMENT AUGMENTATION SYSTEM ☠️  {Fore.YELLOW}║
 {Fore.YELLOW}╚═════════════════════════════════════════════════════════════════════════╝
-{Fore.GREEN}v1.0 - ENHANCED STEALTH EDITION{Style.RESET_ALL}
+{Fore.GREEN}v1.0 - _akk.{Style.RESET_ALL}
     {Fore.RED}[DANGER]{Style.RESET_ALL} {Fore.LIGHTYELLOW_EX}USE AT YOUR OWN RISK. FOR EDUCATIONAL PURPOSES ONLY.{Style.RESET_ALL}
 """
         print(banner)
@@ -64,7 +63,7 @@ class NoRecoilApp:
         
         print(f"{Fore.CYAN}Loaded {profile_count} profile(s){Style.RESET_ALL}")
         
-        # Load last used profile
+        # Load the last used profile
         last_profile = self.config_manager.get_setting('last_profile')
         if last_profile and last_profile in self.profiles:
             self.select_profile(last_profile)
@@ -95,7 +94,7 @@ class NoRecoilApp:
         print(f"{Fore.GREEN}Recoil control activated with profile: {self.current_profile}{Style.RESET_ALL}")
         
         try:
-            # Start the recoil compensation in a separate thread
+            # Start the recoil compensation in a separate thread (for optimization purposes)
             self.mouse_controller.start_compensation(self.profiles[self.current_profile])
         except KeyboardInterrupt:
             self.deactivate()
@@ -239,7 +238,7 @@ class NoRecoilApp:
             }
             movement_method = method_map.get(method_choice, "smooth")
             
-            # Detection avoidance
+            # Detection avoidance (this is just for show, it doesn't actually do anything to avoid detection)
             print(f"\n{Fore.CYAN}Enable detection avoidance? (randomized movements){Style.RESET_ALL}")
             detection_choice = input(f"{Fore.YELLOW}Enable? (y/n, default: y): {Style.RESET_ALL}") or "y"
             detection_avoidance = detection_choice.lower() == "y"
@@ -381,7 +380,7 @@ class NoRecoilApp:
             method_choice = input(f"\n{Fore.YELLOW}Enter choice (1-3, default: {method_map.get(current_method, '3')}): {Style.RESET_ALL}") or method_map.get(current_method, "3")
             movement_method = method_map.get(method_choice, current_method)
             
-            # Detection avoidance
+            # Detection avoidance (this is just for show, it doesn't actually do anything to avoid detection)
             current_detection = profile.get('detection_avoidance', True)
             detection_default = "y" if current_detection else "n"
             print(f"\n{Fore.CYAN}Enable detection avoidance? (randomized movements){Style.RESET_ALL}")
@@ -389,7 +388,7 @@ class NoRecoilApp:
             detection_choice = input(f"{Fore.YELLOW}Enable? (y/n, default: {detection_default}): {Style.RESET_ALL}") or detection_default
             detection_avoidance = detection_choice.lower() == "y"
             
-            # Update profile
+            # Updates profile
             profile['sensitivity'] = sensitivity
             profile['control_mode'] = control_mode
             profile['recoil_preset'] = recoil_preset
