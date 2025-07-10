@@ -14,14 +14,14 @@ class AntiDetectionSystem:
         self.smart_activation = True
         
         # Humanization parameters
-        self.timing_variation = 0.2  # 20% variation in timing
-        self.movement_variation = 0.15  # 15% variation in movement
-        self.micro_pause_chance = 0.05  # 5% chance of micro pause
+        self.timing_variation = 0.2  
+        self.movement_variation = 0.15  
+        self.micro_pause_chance = 0.05 
         
-        # Smart activation
+        # 
         self.activation_delay_min = 0.01
         self.activation_delay_max = 0.03
-        self.skip_chance = 0.03  # 3% chance to skip a compensation
+        self.skip_chance = 0.03  
         
         # Bezier curve control points for more natural movement
         self.bezier_points = 3
@@ -52,11 +52,11 @@ class AntiDetectionSystem:
             # Base randomization
             humanized_delay = delay * random.uniform(1 - self.timing_variation, 1 + self.timing_variation)
             
-            # Occasionally add a micro-pause (human pause/thinking)
+            # Occasionally add a micro pauses
             if random.random() < self.micro_pause_chance:
                 humanized_delay += random.uniform(0.005, 0.02)
                 
-            return max(0.001, humanized_delay)  # Ensure delay is never negative
+            return max(0.001, humanized_delay)
         return delay
     
     def get_activation_delay(self):
@@ -74,13 +74,10 @@ class AntiDetectionSystem:
         control_points = []
         control_points.append((start_x, start_y))
         
-        # Add intermediate control points with slight randomization
         for i in range(self.bezier_points - 2):
             t = (i + 1) / (self.bezier_points - 1)
             mid_x = start_x + (end_x - start_x) * t
             mid_y = start_y + (end_y - start_y) * t
-            
-            # Add slight randomization to control points
             rand_x = mid_x + random.uniform(-abs(end_x - start_x) * 0.1, abs(end_x - start_x) * 0.1)
             rand_y = mid_y + random.uniform(-abs(end_y - start_y) * 0.1, abs(end_y - start_y) * 0.1)
             
@@ -117,10 +114,9 @@ class AntiDetectionSystem:
             time.sleep(5)
             
             if self.process_obfuscation_active:
-                # Change process priority randomly
+                # Change process priority randomly (this kind of helps with detection)
                 if random.random() < 0.3:
                     try:
-                        # On Windows
                         if sys.platform == 'win32':
                             os.system(f"wmic process where processid={os.getpid()} CALL setpriority \"{'normal' if random.random() < 0.5 else 'below normal'}\"")
                     except:
@@ -132,8 +128,7 @@ class AntiDetectionSystem:
     
     def adaptive_timing(self, base_delay, consecutive_shots):
         """Adjust timing based on consecutive shots (humans slow down)"""
-        # Add very slight progressive delay as consecutive shots increase
-        fatigue_factor = min(consecutive_shots * 0.005, 0.1)  # Max 10% increase
+        fatigue_factor = min(consecutive_shots * 0.005, 0.1) 
         return base_delay * (1 + fatigue_factor)
     
     def cleanup(self):
