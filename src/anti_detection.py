@@ -7,7 +7,7 @@ import sys
 
 class AntiDetectionSystem:
     def __init__(self):
-        self.humanization_level = 3  # 1-5 scale
+        self.humanization_level = 3 
         self.process_obfuscation_active = False
         self.variable_timing_enabled = True
         self.enable_advanced_movement = True
@@ -43,7 +43,6 @@ class AntiDetectionSystem:
             
             return x_human, y_human
         else:
-            # Occasionally skip movement (human error simulation)
             return 0, 0
     
     def humanize_delay(self, delay):
@@ -91,7 +90,7 @@ class AntiDetectionSystem:
             x, y = self._bezier_point(control_points, t)
             path.append((x, y))
             
-        return path[1:]  # Skip the first point (starting position)
+        return path[1:] 
     
     def _bezier_point(self, control_points, t):
         """Calculate a point on a bezier curve at parameter t"""
